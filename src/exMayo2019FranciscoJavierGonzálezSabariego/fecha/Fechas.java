@@ -27,13 +27,6 @@ public class Fechas {
   private static int cuentaDias;
   
   /**
-   * Constructor.
-   */
-  public Fechas() {
-    
-  }
-  
-  /**
    * Se introduce una fecha (String) y comprueba si la fecha es correcta según día, mes y año
    * en el formato dd/mm/aaa.
    * 
