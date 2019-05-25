@@ -83,7 +83,7 @@ public class Fechas {
    * @return  true si es correcto, false si no lo es.
    */
   private boolean compruebaMes(String fecha) {
-    return (Integer.parseInt(fecha.substring(3, 5))>0 && Integer.parseInt(fecha.substring(3, 5))<13) ? true : false;
+    return (Integer.parseInt(fecha.substring(3, 5))>0 && Integer.parseInt(fecha.substring(3, 5))<13);
   }
 
   /**
@@ -94,8 +94,7 @@ public class Fechas {
   private boolean compruebaDia(String fecha) {
     ajustaFebrero(fecha);
     return Integer.parseInt(fecha.substring(0, 2))>0 
-        && Integer.parseInt(fecha.substring(0, 2))<=(dias[Integer.parseInt(fecha.substring(3, 5))-1]) 
-        ? true : false;
+        && Integer.parseInt(fecha.substring(0, 2))<=(dias[Integer.parseInt(fecha.substring(3, 5))-1]);
   }
   
   /**
@@ -150,9 +149,8 @@ public class Fechas {
       ajustaFebrero(fecha);
       sumaDia();
       return salidaFecha();
-    } else {
+    } else 
       throw new fechaInvalida();
-    }
   }
 
   /**
@@ -186,9 +184,8 @@ public class Fechas {
       ajustaFebrero(fecha);
       restaDia();
       return salidaFecha();
-    } else {
+    } else 
       throw new fechaInvalida();
-    }
   }
 
   /**
