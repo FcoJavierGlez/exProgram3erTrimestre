@@ -83,8 +83,7 @@ public class Fechas {
    * @return  true si es correcto, false si no lo es.
    */
   private static boolean compruebaMes(String fecha) {
-    return (Integer.parseInt(fecha.substring(3, 5))>0 && Integer.parseInt(fecha.substring(3, 5))<13) 
-        ? true : false;
+    return (Integer.parseInt(fecha.substring(3, 5))>0 && Integer.parseInt(fecha.substring(3, 5))<13) ? true : false;
   }
 
   /**
@@ -294,18 +293,14 @@ public class Fechas {
   public static int comparaFechas() {
     if (anno==annoActual) {
       if (mes==mesActual) {
-        if (dia==diaActual) {
+        if (dia==diaActual)
           return 0;
-        } else {
+        else
           return dia-diaActual;
-        }
-      } else {
+      } else
         return mes-mesActual;
-      }
-    } else {
+    } else
       return anno-annoActual;
-    }
   }
-  
   
 }
