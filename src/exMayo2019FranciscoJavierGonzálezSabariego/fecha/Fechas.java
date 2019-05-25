@@ -146,7 +146,6 @@ public class Fechas {
   public String incrementaDia(String fecha) throws fechaInvalida, insertaFecha {
     if (validaFecha(fecha)) {
       asignaValores(fecha);
-      ajustaFebrero(fecha);
       sumaDia();
       return salidaFecha();
     } else 
@@ -181,7 +180,6 @@ public class Fechas {
   public String decrementaDia(String fecha) throws fechaInvalida, insertaFecha { 
     if (validaFecha(fecha)) {
       asignaValores(fecha);
-      ajustaFebrero(fecha);
       restaDia();
       return salidaFecha();
     } else 
