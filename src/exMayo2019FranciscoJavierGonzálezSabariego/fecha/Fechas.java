@@ -122,10 +122,7 @@ public class Fechas {
    * @param fecha Fecha (String) que se pasa como parámetro
    */
   private void ajustaFebrero(String fecha) {
-    if (esBisiesto(Integer.parseInt(fecha.substring(6, 10))))
-      dias[1]=29;
-    else
-      dias[1]=28;
+    dias[1]=esBisiesto(Integer.parseInt(fecha.substring(6, 10))) ? 29 : 28;
   }
   
   /**
@@ -135,10 +132,7 @@ public class Fechas {
    * 
    */
   private void ajustaFebrero() {
-    if (esBisiesto(anno))
-      dias[1]=29;
-    else
-      dias[1]=28;
+    dias[1]=esBisiesto(anno) ? 29 : 28;
   }
   
   /**
