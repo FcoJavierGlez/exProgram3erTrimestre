@@ -129,6 +129,19 @@ public class Fechas {
   }
   
   /**
+   * Este método comprueba si el año de la fecha almacenada es o no bisiesto,
+   * en caso de serlo el mes de febrero se ajusta a 29 días pero, 
+   * en caso de no serlo el mes se reajusta a 28 días.
+   * 
+   */
+  private void ajustaFebrero() {
+    if (esBisiesto(anno))
+      dias[1]=29;
+    else
+      dias[1]=28;
+  }
+  
+  /**
    * Incrementa la fecha insertada (String) como parámetro en un día.
    * 
    * @param fecha Fecha (String) que se pasa como parámetro
@@ -157,6 +170,7 @@ public class Fechas {
       if (mes>12) {
         anno+=1;
         mes=1;
+        ajustaFebrero();
       }
       dia=1;
     } else 
@@ -192,6 +206,7 @@ public class Fechas {
       if (mes<1) {
         anno-=1;
         mes=12;
+        ajustaFebrero();
       }
       dia=dias[mes-1];
     } else 
