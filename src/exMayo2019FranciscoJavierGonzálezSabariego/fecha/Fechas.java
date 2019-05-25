@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class Fechas {
   
-  private static int [] dias = {31,28,31,30,31,30,31,31,30,31,30,31}; 
+  private static final int [] DIAS = {31,28,31,30,31,30,31,31,30,31,30,31}; 
   
   private static int dia;
   private static int mes;
@@ -20,11 +20,18 @@ public class Fechas {
   
   private static java.util.Date date = new Date();
   
-  private static final int diaActual = date.getDate();
-  private static final int mesActual = (date.getMonth()+1);
-  private static final int annoActual = (date.getYear()+1900);
+  private static final int DIA_ACTUAL = date.getDate();
+  private static final int MES_ACTUAL = (date.getMonth()+1);
+  private static final int ANNO_ACTUAL = (date.getYear()+1900);
   
   private static int cuentaDias;
+  
+  /**
+   * Constructor.
+   */
+  public Fechas() {
+    
+  }
   
   /**
    * Se introduce una fecha (String) y comprueba si la fecha es correcta según día, mes y año
@@ -36,7 +43,7 @@ public class Fechas {
    * @throws fechaInvalida Si la fecha es inválida
    * @throws insertaFecha Si la fecha introducida es una cadena vacía lanza esta excepción.
    */
-  public static boolean validaFecha(String fecha) throws fechaInvalida, insertaFecha {
+  public boolean validaFecha(String fecha) throws fechaInvalida, insertaFecha {
     if (fecha.equals(""))
       throw new insertaFecha();
     if (validaFormato(fecha) && validaDigitos(fecha))
@@ -51,7 +58,7 @@ public class Fechas {
    * @param fecha Fecha (String) pasada como parámetro.
    * @return true si el formato dd/mm/aaaa es verdadero, false si no lo es.
    */
-  private static boolean validaFormato(String fecha) {
+  private boolean validaFormato(String fecha) {
     return Pattern.matches("^[0-9]{2}/[0-9]{2}/[0-9]{4}$", fecha);
   }
 
@@ -62,7 +69,7 @@ public class Fechas {
    * 
    * @return true si los valores son correctos, false si no lo es
    */
-  private static boolean validaDigitos(String fecha) { 
+  private boolean validaDigitos(String fecha) { 
     return compruebaAnno(fecha) && compruebaMes(fecha) && compruebaDia(fecha);
   }
   
@@ -72,7 +79,7 @@ public class Fechas {
    * @param fecha Fecha (String) pasada como parámetro.
    * @return  true si el año correcto, false si no lo es.
    */
-  private static boolean compruebaAnno(String fecha) {
+  private boolean compruebaAnno(String fecha) {
     return Integer.parseInt(fecha.substring(6, 10))>999;
   }
 
@@ -82,7 +89,7 @@ public class Fechas {
    * @param fecha  Fecha (String) pasada como parámetro.
    * @return  true si es correcto, false si no lo es.
    */
-  private static boolean compruebaMes(String fecha) {
+  private boolean compruebaMes(String fecha) {
     return (Integer.parseInt(fecha.substring(3, 5))>0 && Integer.parseInt(fecha.substring(3, 5))<13) ? true : false;
   }
 
@@ -91,10 +98,10 @@ public class Fechas {
    * 
    * @param fecha Fecha (String) que se pasa como parámetro
    */
-  private static boolean compruebaDia(String fecha) {
+  private boolean compruebaDia(String fecha) {
     ajustaFebrero(fecha);
     return Integer.parseInt(fecha.substring(0, 2))>0 
-        && Integer.parseInt(fecha.substring(0, 2))<=(dias[Integer.parseInt(fecha.substring(3, 5))-1]) 
+        && Integer.parseInt(fecha.substring(0, 2))<=(DIAS[Integer.parseInt(fecha.substring(3, 5))-1]) 
         ? true : false;
   }
   
@@ -104,7 +111,7 @@ public class Fechas {
    * @param anno  Año (int) que se introduce como parámetro
    * @return  true si el año es bisiesto, false si no lo es.
    */
-  private static boolean esBisiesto(int anno) {
+  private boolean esBisiesto(int anno) {
     if ((anno%4)!=0 && (anno%100)!=0)
       return false;
     else if ((anno%4)==0 && (anno%100)!=0)
@@ -121,11 +128,11 @@ public class Fechas {
    * 
    * @param fecha Fecha (String) que se pasa como parámetro
    */
-  private static void ajustaFebrero(String fecha) {
+  private void ajustaFebrero(String fecha) {
     if (esBisiesto(Integer.parseInt(fecha.substring(6, 10))))
-      dias[1]=29;
+      DIAS[1]=29;
     else
-      dias[1]=28;
+      DIAS[1]=28;
   }
   
   /**
@@ -137,7 +144,7 @@ public class Fechas {
    * @throws fechaInvalida Se lanza esta excepción cuando la fecha introducida como parámetro es inválida
    * @throws insertaFecha Si la fecha introducida es una cadena vacía lanza esta excepción.
    */
-  public static String incrementaDia(String fecha) throws fechaInvalida, insertaFecha {
+  public String incrementaDia(String fecha) throws fechaInvalida, insertaFecha {
     if (validaFecha(fecha)) {
       asignaValores(fecha);
       ajustaFebrero(fecha);
@@ -151,8 +158,8 @@ public class Fechas {
   /**
    * Suma un día a la fecha introducida.
    */
-  private static void sumaDia() {
-    if (dia+1>dias[mes-1]) {
+  private void sumaDia() {
+    if (dia+1>DIAS[mes-1]) {
       mes+=1;
       if (mes>12) {
         anno+=1;
@@ -172,7 +179,7 @@ public class Fechas {
    * @throws fechaInvalida Se lanza esta excepción cuando la fecha introducida como parámetro es inválida
    * @throws insertaFecha Si la fecha introducida es una cadena vacía lanza esta excepción.
    */
-  public static String decrementaDia(String fecha) throws fechaInvalida, insertaFecha { 
+  public String decrementaDia(String fecha) throws fechaInvalida, insertaFecha { 
     if (validaFecha(fecha)) {
       asignaValores(fecha);
       ajustaFebrero(fecha);
@@ -186,14 +193,14 @@ public class Fechas {
   /**
    * Resta un día a la fecha introducida.
    */
-  private static void restaDia() {
+  private void restaDia() {
     if (dia-1<1) {
       mes-=1;
       if (mes<1) {
         anno-=1;
         mes=12;
       }
-      dia=dias[mes-1];
+      dia=DIAS[mes-1];
     } else 
       dia-=1;
   }
@@ -203,7 +210,7 @@ public class Fechas {
    * 
    * @return Resultado nueva fecha (String) dd/mm/aaaa.
    */
-  private static String salidaFecha() {
+  private String salidaFecha() {
     return salidaDia()+salidaMes()+anno;
   }
 
@@ -213,7 +220,7 @@ public class Fechas {
    * 
    * @return Salida del mes (String)
    */
-  private static String salidaMes() {
+  private String salidaMes() {
     if (mes<10)
       return "0"+String.valueOf(mes)+"/";
     return String.valueOf(mes)+"/";
@@ -225,7 +232,7 @@ public class Fechas {
    * 
    * @return Salida del día (String)
    */
-  private static String salidaDia() {
+  private String salidaDia() {
     if (dia<10)
       return "0"+String.valueOf(dia)+"/";
     return String.valueOf(dia)+"/";
@@ -238,7 +245,7 @@ public class Fechas {
    * 
    * @param fecha Fecha (String) que se pasa como parámetro
    */
-  private static void asignaValores(String fecha) {
+  private void asignaValores(String fecha) {
     dia = Integer.parseInt(fecha.substring(0, 2));
     mes = Integer.parseInt(fecha.substring(3, 5));
     anno = Integer.parseInt(fecha.substring(6, 10));
@@ -257,7 +264,7 @@ public class Fechas {
    * @throws insertaFecha Si la fecha introducida es una cadena
    *                        vacía lanza esta excepción.
    */
-  public static int diasHastaHoy(String fecha) throws fechaInvalida, insertaFecha {
+  public int diasHastaHoy(String fecha) throws fechaInvalida, insertaFecha {
     if (!validaFecha(fecha))
       throw new fechaInvalida();
     asignaValores(fecha);
@@ -269,7 +276,7 @@ public class Fechas {
    * Cuenta los días que hay de diferencia entre la fecha que
    * se desea comparar y la fecha del sistema.
    */
-  private static void contarDias() {
+  private void contarDias() {
     cuentaDias = 0;
     while (comparaFechas()!=0) {
       if (comparaFechas()<0) {
@@ -290,17 +297,17 @@ public class Fechas {
    *        &lt;0 si la fecha introducida es anterior a la del sistema.
    *        &gt;0 si la fecha introducida es posterior a la del sistema.
    */
-  public static int comparaFechas() {
-    if (anno==annoActual) {
-      if (mes==mesActual) {
-        if (dia==diaActual)
+  public int comparaFechas() {
+    if (anno==ANNO_ACTUAL) {
+      if (mes==MES_ACTUAL) {
+        if (dia==DIA_ACTUAL)
           return 0;
         else
-          return dia-diaActual;
+          return dia-DIA_ACTUAL;
       } else
-        return mes-mesActual;
+        return mes-MES_ACTUAL;
     } else
-      return anno-annoActual;
+      return anno-ANNO_ACTUAL;
   }
   
 }

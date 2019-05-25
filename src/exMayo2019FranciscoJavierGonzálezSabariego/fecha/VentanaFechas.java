@@ -20,6 +20,8 @@ public class VentanaFechas extends JFrame {
   private JPanel contentPane;
   private JTextField textEntrada;
   private JTextField textSalida;
+  
+  private Fechas f = new Fechas();
 
   /**
    * Launch the application.
@@ -99,7 +101,7 @@ public class VentanaFechas extends JFrame {
     
     public void actionPerformed(ActionEvent e) {
       try {
-        if (Fechas.validaFecha(textEntrada.getText())) {
+        if (f.validaFecha(textEntrada.getText())) {
           textSalida.setText("");
           textSalida.setText("La fecha es válida.");
         }
@@ -124,7 +126,7 @@ public class VentanaFechas extends JFrame {
     
     public void actionPerformed(ActionEvent e) {
       try {
-        textSalida.setText(Fechas.incrementaDia(textEntrada.getText()));
+        textSalida.setText(f.incrementaDia(textEntrada.getText()));
       } catch (fechaInvalida e1) {
         textSalida.setText("");
         JOptionPane.showMessageDialog(null, "La fecha es inválida.",
@@ -146,7 +148,7 @@ public class VentanaFechas extends JFrame {
     
     public void actionPerformed(ActionEvent e) {
       try {
-        textSalida.setText(Fechas.decrementaDia(textEntrada.getText()));
+        textSalida.setText(f.decrementaDia(textEntrada.getText()));
       } catch (fechaInvalida e1) {
         textSalida.setText("");
         JOptionPane.showMessageDialog(null, "La fecha es inválida.",
@@ -168,7 +170,7 @@ public class VentanaFechas extends JFrame {
     
     public void actionPerformed(ActionEvent e) {
       try {
-        textSalida.setText(String.valueOf(Fechas.diasHastaHoy(textEntrada.getText())+" días de diferencia."));
+        textSalida.setText(String.valueOf(f.diasHastaHoy(textEntrada.getText())+" días de diferencia."));
       } catch (fechaInvalida e1) {
         textSalida.setText("");
         JOptionPane.showMessageDialog(null, "La fecha es inválida.",
