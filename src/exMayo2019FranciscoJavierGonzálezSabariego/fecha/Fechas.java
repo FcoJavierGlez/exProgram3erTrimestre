@@ -218,9 +218,7 @@ public class Fechas {
    * @return Salida del mes (String)
    */
   private String salidaMes() {
-    if (mes<10)
-      return "0"+String.valueOf(mes)+"/";
-    return String.valueOf(mes)+"/";
+    return (mes<10) ? "0"+String.valueOf(mes)+"/" : String.valueOf(mes)+"/";
   }
 
   /**
@@ -230,9 +228,7 @@ public class Fechas {
    * @return Salida del día (String)
    */
   private String salidaDia() {
-    if (dia<10)
-      return "0"+String.valueOf(dia)+"/";
-    return String.valueOf(dia)+"/";
+    return (dia<10) ? "0"+String.valueOf(dia)+"/" : String.valueOf(dia)+"/";
   }
 
   /**
