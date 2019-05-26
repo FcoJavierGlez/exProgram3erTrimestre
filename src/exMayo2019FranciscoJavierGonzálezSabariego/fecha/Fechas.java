@@ -276,13 +276,11 @@ public class Fechas {
   private void contarDias() {
     cuentaDias = 0;
     while (comparaFechas()!=0) {
-      if (comparaFechas()<0) {
+      if (comparaFechas()<0)
         sumaDia();
-        cuentaDias+=1;
-      } else if (comparaFechas()>0) {
+      if (comparaFechas()>0)
         restaDia();
-        cuentaDias+=1;
-      }
+      cuentaDias+=1;
     }
   }
   
