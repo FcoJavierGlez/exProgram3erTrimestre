@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class Fechas {
   
-  private static int [] dias = {31,28,31,30,31,30,31,31,30,31,30,31}; 
+  private static int [] diasDelMes = {31,28,31,30,31,30,31,31,30,31,30,31};
   
   private static int dia;
   private static int mes;
@@ -94,7 +94,7 @@ public class Fechas {
   private boolean compruebaDia(String fecha) {
     ajustaFebrero(fecha);
     return Integer.parseInt(fecha.substring(0, 2))>0 
-        && Integer.parseInt(fecha.substring(0, 2))<=(dias[Integer.parseInt(fecha.substring(3, 5))-1]);
+        && Integer.parseInt(fecha.substring(0, 2))<=(diasDelMes[Integer.parseInt(fecha.substring(3, 5))-1]);
   }
   
   /**
@@ -121,7 +121,7 @@ public class Fechas {
    * @param fecha Fecha (String) que se pasa como parámetro
    */
   private void ajustaFebrero(String fecha) {
-    dias[1]=esBisiesto(Integer.parseInt(fecha.substring(6, 10))) ? 29 : 28;
+    diasDelMes[1]=esBisiesto(Integer.parseInt(fecha.substring(6, 10))) ? 29 : 28;
   }
   
   /**
@@ -131,7 +131,7 @@ public class Fechas {
    * 
    */
   private void ajustaFebrero() {
-    dias[1]=esBisiesto(anno) ? 29 : 28;
+    diasDelMes[1]=esBisiesto(anno) ? 29 : 28;
   }
   
   /**
@@ -156,7 +156,7 @@ public class Fechas {
    * Suma un día a la fecha introducida.
    */
   private void sumaDia() {
-    if (dia+1>dias[mes-1]) {
+    if (dia+1>diasDelMes[mes-1]) {
       mes+=1;
       if (mes>12) {
         anno+=1;
@@ -197,7 +197,7 @@ public class Fechas {
         mes=12;
         ajustaFebrero();
       }
-      dia=dias[mes-1];
+      dia=diasDelMes[mes-1];
     } else 
       dia-=1;
   }
