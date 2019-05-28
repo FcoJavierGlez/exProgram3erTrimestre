@@ -9,8 +9,8 @@ import java.io.IOException;
 
 /**
  * Clase que lee un fichero de texto y modifica línea a línea cada caracter que coincida 
- * con los siguientes caracteres en mayúscula: "A", "B", "E", "I", "O", "S", "T" por
- * los siguientes caracteres numéricos: "4", "8", "3", "1", "0", "5", "7".
+ * con los siguientes caracteres en mayúscula o minúscula: "A", "B", "E", "I", "O", "S", "T"
+ * por los siguientes caracteres numéricos: "4", "8", "3", "1", "0", "5", "7".
  * 
  * Además se podrá exportar el resultado a un fichero si así se desea.
  * 
@@ -99,7 +99,7 @@ public class CambiaCaracteres {
    */
   private static String alteraCaracter(String entrada) {
     for (int i=0; i<CARACTERES[0].length; i++) {
-      if (entrada.equals(CARACTERES[0][i]))
+      if (entrada.toUpperCase().equals(CARACTERES[0][i]))
         return CARACTERES[1][i];
     }
     return entrada;
